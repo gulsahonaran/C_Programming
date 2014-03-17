@@ -1,0 +1,72 @@
+//Gulsah Onaran
+//contac me for anything questions
+//facebook.com/gulsah.onaran
+//twitter.com/gulsh_
+//prepared with Microsoft Visual Studio 2013
+//C programing language
+
+
+
+
+
+#include<stdio.h>
+#include<conio.h>
+
+int main()
+{
+	int a[50];   //kullanıcıdan alınan değerleri bi araya toplayabilmek için dizi tanımlanır.
+	int n, i, toplam=0, min, fark, poz=0;  
+	float ort;
+	int indis=0;
+
+	printf("N degerini giriniz:");    //kullanıcıdan kaç adet sayi girileceği öğrenilir bu sayede döngü sınırımızı belirleriz.
+		scanf_s("%d", &n);            //bu alınan sayiyi n sayisina atadık.
+
+		for (i = 0; i < n; i++)           //bu döngü ile birlikte kullanıcıdan alınan sayilari a[50] dizisinin içine atarız.
+		{
+			printf("%d. sayiyi giriniz:", i + 1);
+			scanf_s("%d", &a[i]);
+
+				toplam = toplam + a[i];      //girilen değerler toplanır.
+
+		}
+		ort = (float)toplam / (float)n;         //döngü son bulunca toplam en başta girilen sayiya bölerek ortalama bulunur. toplam ve n değişkeninin önüne"(float)"yazmamızın nedeni:
+		                                                                   //float bir sonuç istenmesidir.(işlem yaptığınız değerlerin türü ne ise sonuçta o çıkar.)
+
+		printf("Ortalama(Average):%f", ort); 
+
+
+		i = 0;      //aşağıdaki işlemlerin sağlıklı olması için i değeri sıfırlanır.
+
+		      //diğer for döngüsünde karşılaştırma yapabilmek için önce değişkenlerin ilk değerleri girilir.
+			fark= (int)ort - (int)a[0];
+			min = fark;
+			if (min < 0)    //burada sonucun negatif çıkması sonucunda işlem pozitife çevrilir. Böylelikle başka bir if koşulu gerekmeksizin tek koşulda işlem halledilir. 
+				min = min*(-1);
+			indis = i;    //aşağıda yapılacak işlemlerin ilk değerlerini bulduğumuz için indis yanidönen değerinde ilk değeri girilmelidir.
+
+
+
+               //bu for döngüsünde girilen değerlerden hangisinin ortalamaya daha yakın olduğunu ve bu değerin dizide kaçıncı sırada bulunduğunu bulur. 
+		for ( i = 1; i < n; i++)
+		{
+
+					fark = (int)ort - a[i];
+					if (fark < 0)
+						fark = fark*(-1);   //burada da negatifi pozitife çeviririz.
+					if (fark <= min)   //eğer yeni bulduğumuz değer başta tanımladığımız min değerinden küçük ise ortalamaya daha yakındır. Bu yüzden yukarıdaki tanımladığımız değerleri güncellemeliyiz. 
+					{
+						min = fark;
+						indis = a[i];
+						poz = i;
+
+					}
+
+
+
+		}
+		printf("\n\tOrtalamaya en yakin sayi:%d",a[poz]);
+		printf("\n\t\tPozisyonu:%d", poz+1);   //poz+1 dememizin nedeni kullanıcın ekranda gördüğü sıra 1den başlamaktadır fakat dizi içinde sıralanışta 0dan başlamaktadır. Burada kullanıcı baz alınarak sırayı kullanıcıya göre yazdırmak için bu şekilde yazılmıştır.
+		_getch();
+
+}
